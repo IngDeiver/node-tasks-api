@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import router from '../routes';
 import errorHandler from '../exceptions/errorHandler';
+import { stream } from '../utils';
 
 /**
  *
@@ -45,8 +46,8 @@ class Server {
    *
    * Initialize the application
    * @static
-   * @param {number} port - the port
-   * @return Server
+   * @param {number} port - The port
+   * @return {Server} Instance of server
    * @memberof Server
    */
   static init(port: number): Server {
@@ -56,7 +57,7 @@ class Server {
   /**
    *
    * Start listen the server
-   * @param {Function} callback
+   * @param {Function} callback - the callback to call when listen server
    * @memberof Server
    */
   listen(callback: Function): void {
@@ -71,10 +72,10 @@ class Server {
    */
   private initializeMiddlewares() {
     if (this.env === 'production') {
-      this.app.use(morgan('combined'));
+      this.app.use(morgan('combined', { stream }));
       this.app.use(cors({ origin: 'your.domain.com', credentials: true }));
     } else if (this.env === 'development') {
-      this.app.use(morgan('dev'));
+      this.app.use(morgan('dev', { stream }));
       this.app.use(cors({ origin: true, credentials: true }));
     }
     this.app.use(express.json());

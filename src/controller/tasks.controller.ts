@@ -6,7 +6,22 @@ import { Task } from '../models';
 import { HttpException } from '../exceptions';
 import { TaskRepository } from '../repository';
 
+/**
+ *
+ * THe controller of tasks
+ * @class TaskControler
+ */
 class TaskControler {
+  /**
+   *
+   *
+   * @static
+   * @param {Request} req - The request
+   * @param {Response} res - The response
+   * @param {NextFunction} next - The next middleware in queue
+   * @return {JSON} - A list of tasks
+   * @memberof TaskControler
+   */
   public static async list(req: Request, res: Response, next: NextFunction) {
     try {
       const tasks: Array<ITask> = await TaskRepository.list();
@@ -16,6 +31,16 @@ class TaskControler {
     }
   }
 
+  /**
+   *
+   *
+   * @static
+   * @param {Request} req - The request
+   * @param {Response} res - The response
+   * @param {NextFunction} next - The next middleware in queue
+   * @return {JSON} - A task creted
+   * @memberof TaskControler
+   */
   public static async create(req: Request, res: Response, next: NextFunction) {
     try {
       const { title } = req.body;
