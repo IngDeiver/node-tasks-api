@@ -1,67 +1,67 @@
 /* eslint-disable no-unused-vars */
 /**
  *
- * The interface for managament generics crud
- * @interface Crud
+ * The interface for managament generics ICrud
+ * @interface ICrud
  * @template T - The type of resource
  * @template U - The type of ID the resource
  */
-interface Crud<T, U> {
+interface ICrud<T, U> {
      /**
       *
       * Create a new resource
       * @param {T} object - Object to create
       * @return {T} - Return a resource
-      * @memberof Crud
+      * @memberof ICrud
       */
-     create(object: T): T;
+     create(object: T): Promise<T>;
      /**
       *
       * List all resources of type T
       * @return {Array<T>} - Return an Array<T> resources
-      * @memberof Crud
+      * @memberof ICrud
       */
-     list(): Array<T>;
+     list(): Promise<Array<T>>;
      /**
       *
       * Get a resource by id
       * @param {U} id - id of resource to find
       * @return {T} - Return a resource
-      * @memberof Crud
+      * @memberof ICrud
       */
-     getById(id: U): T;
+     getById(id: U): Promise<T>;
      /**
       *
       * Remove a resource
       * @param {T} object - Object to remove
       * @return {T} - Return a resource removed
-      * @memberof Crud
+      * @memberof ICrud
       */
-     remove(object: T): T;
+     remove(object: T): Promise<T>;
      /**
       *
       *  Remove a resource by id
       * @param {U} id - id of resource to find
       * @return {T} - Return a resource
-      * @memberof Crud
+      * @memberof ICrud
       */
-     remove(id: U): T;
+     removeById(id: U): Promise<T>;
      /**
       *
       * Update a resource
       * @param {T} object - Object to update
       * @return {T} - Return a resource updated
-      * @memberof Crud
+      * @memberof ICrud
       */
-     update(object: T): T;
+     update(object: T): Promise<T>;
      /**
       *
       * Update a resource by id
       * @param {U} id - id of resource to find
       * @return {T} - Return a resource updated
-      * @memberof Crud
+      * @memberof ICrud
       */
-     update(id: U): T;
+     updateById(id: U): Promise<T>;
 }
 
-export default Crud;
+export default ICrud;
