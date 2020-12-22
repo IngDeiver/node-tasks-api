@@ -1,4 +1,7 @@
 /* eslint-disable no-unused-vars */
+
+import ITask from './ITask';
+
 /**
  *
  * The interface for managament generics ICrud
@@ -29,7 +32,7 @@ interface ICrud<T, U> {
       * @return {T} - Return a resource
       * @memberof ICrud
       */
-     getById(id: U): Promise<T>;
+     getById(id: U): Promise<T | null>;
      /**
       *
       * Remove a resource
@@ -45,7 +48,7 @@ interface ICrud<T, U> {
       * @return {T} - Return a resource
       * @memberof ICrud
       */
-     removeById(id: U): Promise<T>;
+     removeById(id: U): Promise<T | null>;
      /**
       *
       * Update a resource
@@ -61,7 +64,7 @@ interface ICrud<T, U> {
       * @return {T} - Return a resource updated
       * @memberof ICrud
       */
-     updateById(id: U): Promise<T>;
+     updateById(id: U, task: ITask): Promise<T | null>;
 }
 
 export default ICrud;
