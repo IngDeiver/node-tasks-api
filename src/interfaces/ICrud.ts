@@ -64,7 +64,7 @@ interface ICrud<T, U> {
       * @return {T} - Return a resource updated
       * @memberof ICrud
       */
-     updateById(id: U, task: ITask): Promise<T | null>;
+     updateById(id: U, body: Object): Promise<T | null>;
 }
 
 export default ICrud;

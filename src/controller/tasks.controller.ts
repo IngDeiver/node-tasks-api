@@ -110,8 +110,7 @@ class TaskControler {
       const { id } = req.params;
       const { title } = req.body;
       if (!title) throw new HttpException(400, 'Title porperty is required');
-      const taskToUpdated: ITask = new Task({ title });
-      const taskUpdated: ITask | null = await TaskService.updateById(id, taskToUpdated);
+      const taskUpdated: ITask | null = await TaskService.updateById(id, { title });
       if (!taskUpdated) throw new HttpException(404, 'Task not found');
       res.json(taskUpdated);
     } catch (error) {

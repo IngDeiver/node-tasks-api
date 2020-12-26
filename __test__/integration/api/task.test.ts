@@ -59,7 +59,7 @@ describe('should get task by id', () => {
 // update
 describe('should update a task', () => {
   it('should update with 200 status', async () => {
-    const id: string = '5fe029599666986571255393';
+    const id: string = '5fe02a4203cba8663586181b';
     const task = { title: 'Task update with test' };
     const response = await request.put(`/api/task/${id}`)
       .send(task);

@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+import { Task } from '../models';
 import { ICrud, ITask } from '../interfaces';
 import { TaskRepository } from '../repository';
 
@@ -11,7 +12,7 @@ import { TaskRepository } from '../repository';
 class TaskService implements ICrud<ITask, string> {
   /**
    *
-   *
+   * Create a new task
    * @param {ITask} task - The task to create
    * @return {Promise<ITask>}  A task created
    * @memberof TaskService
@@ -22,7 +23,7 @@ class TaskService implements ICrud<ITask, string> {
 
   /**
    *
-   *
+   * List all tasks
    * @return {Promise<Array<ITask>>}  A list of tasks
    * @memberof TaskService
    */
@@ -32,7 +33,7 @@ class TaskService implements ICrud<ITask, string> {
 
   /**
    *
-   *
+   * Find task by id
    * @param {string} id - The id to find
    * @return {Promise<ITask>}  A task
    * @memberof TaskService
@@ -43,7 +44,7 @@ class TaskService implements ICrud<ITask, string> {
 
   /**
    *
-   *
+   * Remove a task
    * @param {ITask} task - The task to remove
    * @return {Promise<ITask>}  A task removed
    * @memberof TaskService
@@ -54,7 +55,7 @@ class TaskService implements ICrud<ITask, string> {
 
   /**
    *
-   *
+   * Remove task by id
    * @param {string} id - The id to find
    * @return {Promise<ITask>}  A task removed
    * @memberof TaskService
@@ -67,7 +68,7 @@ class TaskService implements ICrud<ITask, string> {
 
   /**
    *
-   *
+   * Update a task
    * @param {ITask} task - The task to updated
    * @return {Promise<ITask>}  A task updated
    * @memberof TaskService
@@ -78,19 +79,18 @@ class TaskService implements ICrud<ITask, string> {
 
   /**
    *
-   *
+   * Update task by if
    * @param {string} id - The id to find
    * @param {ITask} task - The task to updated
    * @return {Promise<ITask>} A task updated
    * @memberof TaskService
    */
-  async updateById(id: string, task: ITask): Promise<ITask | null > {
-    const taskToUpdate = await this.getById(id);
-    if (taskToUpdate) {
-      taskToUpdate.title = task.title;
-      await taskToUpdate.update();
-    }
-    return taskToUpdate;
+  async updateById(id: string, body: Object): Promise<ITask | null > {
+    // eslint-disable-next-line no-unused-vars
+    return new Promise<ITask | null>((resolve, reject) => {
+      Task.findOneAndUpdate({ _id: id }, { ...body }, { new: true },
+        (error, task: ITask | null) => resolve(task));
+    });
   }
 }
 
