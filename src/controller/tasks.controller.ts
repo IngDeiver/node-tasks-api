@@ -27,7 +27,7 @@ class TaskControler {
       const tasks: Array<ITask> = await TaskService.list();
       res.json(tasks);
     } catch (error) {
-      return next(new HttpException(500, error.message));
+      return next(new HttpException(error.status || 500, error.message));
     }
   }
 
@@ -49,7 +49,7 @@ class TaskControler {
       const taskSaved: ITask = await TaskService.create(task);
       res.json(taskSaved);
     } catch (error) {
-      return next(new HttpException(error.status, error.message));
+      return next(new HttpException(error.status || 500, error.message));
     }
   }
 
@@ -70,7 +70,7 @@ class TaskControler {
       if (!task) throw new HttpException(404, 'Task not found');
       res.json(task);
     } catch (error) {
-      return next(new HttpException(error.status, error.message));
+      return next(new HttpException(error.status || 500, error.message));
     }
   }
 
@@ -91,7 +91,7 @@ class TaskControler {
       if (!task) throw new HttpException(404, 'Task not found');
       res.json(task);
     } catch (error) {
-      return next(new HttpException(error.status, error.message));
+      return next(new HttpException(error.status || 500, error.message));
     }
   }
 
@@ -114,7 +114,7 @@ class TaskControler {
       if (!taskUpdated) throw new HttpException(404, 'Task not found');
       res.json(taskUpdated);
     } catch (error) {
-      return next(new HttpException(error.status, error.message));
+      return next(new HttpException(error.status || 500, error.message));
     }
   }
 }
