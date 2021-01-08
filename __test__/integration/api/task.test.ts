@@ -42,10 +42,9 @@ describe('should save task', () => {
 // get by id
 describe('should get task by id', () => {
   it('should response with 200 status', async () => {
-    const id = '5fe0cc7e59509f48025a35f9';
+    const id = '5fe125f978a78f7dacf010a5';
     const response = await request.get(`/api/task/${id}`);
     expect(response.status).toBe(200);
-    expect(response.body.title).toEqual('Task saved with unit tes');
   });
 
   it('should response with 404 status', async () => {
@@ -59,7 +58,7 @@ describe('should get task by id', () => {
 // update
 describe('should update a task', () => {
   it('should update with 200 status', async () => {
-    const id: string = '5fe02a4203cba8663586181b';
+    const id: string = '5fe125f978a78f7dacf010a5';
     const task = { title: 'Task update with test' };
     const response = await request.put(`/api/task/${id}`)
       .send(task);
