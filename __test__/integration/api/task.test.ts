@@ -7,6 +7,7 @@ import server from '../../../src/app';
 
 let app: expres.Application;
 let request: supertest.SuperTest<supertest.Test>;
+const baseUri = '/api/task';
 beforeAll(() => {
   app = server.app;
   request = supertest(app);
@@ -14,25 +15,30 @@ beforeAll(() => {
 
 // list
 it('should get list tasks', async () => {
-  const response = await request.get('/api/task');
+  const response = await request.get(baseUri);
   expect(response.status).toBe(200);
   expect(response.body).toBeInstanceOf(Array);
 });
 
 // save
-describe('should save task', () => {
+describe('should save and remove task', () => {
   it('should save with 200 status', async () => {
     const title = 'Task saved with unit tes';
-    const response = await request.post('/api/task')
+    const response = await request.post(baseUri)
       .send({ title })
       .set('Accept', 'application/json');
     expect(response.status).toBe(200);
     expect(response.body.title).toBeDefined();
     expect(response.body.title).toEqual(title);
+
+    // remove a taks saved
+    const responseRemove = await request.delete(`/api/task/${response.body._id}`);
+    expect(responseRemove.status).toBe(200);
+    expect(responseRemove.body.title).toBeDefined();
   });
 
   it('should fail save without title property with 400 status', async () => {
-    const response = await request.post('/api/task')
+    const response = await request.post(baseUri)
       .set('Accept', 'application/json');
     expect(response.status).toBe(400);
     expect(response.body.title).toBeUndefined();

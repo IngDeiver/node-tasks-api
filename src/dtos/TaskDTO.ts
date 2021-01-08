@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-empty-function */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-constructor */
@@ -11,6 +12,8 @@ import { IsString, IsNotEmpty } from 'class-validator';
  *
  */
 class TaskDTO {
+    public _id: string
+
     @IsNotEmpty()
     @IsString()
     public title: string;
@@ -20,8 +23,9 @@ class TaskDTO {
    * @param {string} title - the tile of task
    * @memberof TaskDTO
    */
-    constructor(title: string) {
+    constructor(_id: string, title: string) {
       this.title = title;
+      this._id = _id;
     }
 }
 

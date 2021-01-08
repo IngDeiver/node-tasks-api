@@ -44,7 +44,6 @@ class TaskControler {
   public static async create(req: Request, res: Response, next: NextFunction) {
     try {
       const { title } = req.body;
-      if (!title) throw new HttpException(400, 'Title porperty is required');
       const task:ITask = new Task({ title });
       const taskSaved: ITask = await TaskService.create(task);
       res.json(taskSaved);
@@ -109,7 +108,6 @@ class TaskControler {
     try {
       const { id } = req.params;
       const { title } = req.body;
-      if (!title) throw new HttpException(400, 'Title porperty is required');
       const taskUpdated: ITask | null = await TaskService.updateById(id, { title });
       if (!taskUpdated) throw new HttpException(404, 'Task not found');
       res.json(taskUpdated);
